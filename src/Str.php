@@ -64,7 +64,7 @@ class Str
     }
 
     //Fonction camelCase
-    public function camelCase ()
+    public function camelCase()
     {
         if(strpos($this->string, ' ')==FALSE )
         {
@@ -113,5 +113,11 @@ class Str
     public function kebabCase()
     {
         return $this->slugcase();
+    }
+
+    public function __get($name)
+    {
+        $str = (string) $this->{$name}();
+        return $str;
     }
 }

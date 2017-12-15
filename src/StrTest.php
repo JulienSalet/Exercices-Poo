@@ -18,12 +18,12 @@ class StrTest extends TestCase
         $this->assertSame('myString', $string);
     }
 
-    public function testExo1_5()
+    public function testExo2()
     {
         $this->assertTrue(Str::on('my_string')->camelCase()->toString() === 'myString');
     }
 
-    public function testExo2()
+    public function testExo2_5()
     {
         $this->assertTrue(Str::on('my_string')->camelCase()->toString() === 'myString');
         $this->assertTrue(Str::on('myString')->camelCase()->toString() === 'myString');
@@ -72,15 +72,15 @@ class StrTest extends TestCase
         $this->assertSame('mY StrIng',(string) $str);
     }
 
-    /*public function testExo7()
+    public function testExo7()
     {
         $str = str('mY StrIng');
-        $str->camelCase === 'myString';
-        $str->snakeCase === 'my_string';
-        $str->studlyCase === 'MyString';
-        $str->titleCase === 'MyString';
-        $str->slugCase === 'my-string';
-        $str->kebabCase === 'my-string';
-        $str() === 'mY StrIng';
-    }*/
+        $this->assertSame('myString', $str->camelCase);
+        $this->assertSame('my_string',$str->snakeCase);
+        $this->assertSame('MyString', $str->studlycase);
+        $this->assertSame('MyString',$str->titleCase);
+        $this->assertSame('my-string', $str->slugCase);
+        $this->assertSame('my-string',$str->kebabCase);
+        //$str() === 'mY StrIng';
+    }
 }
