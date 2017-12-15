@@ -72,15 +72,15 @@ class StrTest extends TestCase
         $this->assertSame('mY StrIng',(string) $str);
     }
 
-    public function testExo7()
+    /*public function testExo7()
     {
         $str = str('mY StrIng');
         $str->camelCase === 'myString';
-        /*$str->snakeCase === 'my_string';
+        $str->snakeCase === 'my_string';
         $str->studlyCase === 'MyString';
         $str->titleCase === 'MyString';
         $str->slugCase === 'my-string';
         $str->kebabCase === 'my-string';
-        $str() === 'mY StrIng';*/
-    }
+        $str() === 'mY StrIng';
+    }*/
 }
