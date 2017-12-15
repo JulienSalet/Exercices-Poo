@@ -115,6 +115,7 @@ class Str
         return $this->slugcase();
     }
 
+    //Methode magique que ajouter les crochets à $str
     public function __get($name)
     {
         $str = (string) $this->{$name}();

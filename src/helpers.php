@@ -1,5 +1,4 @@
 <?php
-
 use Strings\Str;
 
 function str($string)
