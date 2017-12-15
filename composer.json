@@ -1,0 +1,19 @@
+{
+  "name": "JulienSalet/Projet PHP_POO",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Julien SALET",
+      "email": "juliensalet@gmail.com"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^6.5",
+    "symfony/var-dumper": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Strings\\": "src\\"
+    }
+  }
+}
