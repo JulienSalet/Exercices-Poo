@@ -6,48 +6,48 @@ class Str
 {
     private $string;
 
-    //Fonction on qui crée un nouvel objet Str en static
+    //Création d'un nouvel objet Str en static
     public static function on($string)
     {
         return new Str($string);
     }
 
-    //Fonction qui remplace un mot par un autre
+    //Remplacement d'un mot par un autre
     public function replace ($search, $replace)
     {
-        $this->string = str_replace($search, $replace, $this->string);
-        return $this;
+        $replaced = str_replace($search, $replace, $this->string);
+        return new self($replaced);
     }
 
-    //Fonction qui met la première lettre des mots en majuscule
+    //Met la première lettre des mots en majuscule
     public function ucwords()
     {
-        $this->string = ucwords($this->string);
-        return $this;
+        $ucwords = ucwords($this->string);
+        return new self($ucwords);
     }
 
-    //Fonction qui met la première lettre des mots en minuscule
+    //Met toutes les lettres en minuscule
     public function lcwords()
     {
-        $this->string = mb_strtolower($this->string);
-        return $this;
+        $lcwords = mb_strtolower($this->string);
+        return new self($lcwords);
     }
 
-    //Fonction qui met la première lettre des mots en minuscule
+    //Met la première lettre des mots en minuscule
     public function lcfirst()
     {
-        $this->string = lcfirst($this->string);
-        return $this;
+        $lcfirst = lcfirst($this->string);
+        return new self($lcfirst);
     }
 
-    //Fonction qui crée un espace avant les majuscules
-    public function pregreplace()
+    //Creation d'un element defini avant un autre element defini
+    public function pregreplace($search, $replace)
     {
-        $this->string = preg_replace('/(.)(?=[A-Z])/', '$1_', string);
-        return $this;
+        $pregreplace = preg_replace($search, $replace, $this->string);
+        return new self($pregreplace);
     }
 
-    //Fonction construct qui initie l'objet à la variable $string
+    //Initiation de l'objet à la variable $string
     public function __construct($string)
     {
         $this->string = $string;
@@ -63,15 +63,55 @@ class Str
         return $this->string;
     }
 
-    //Fonction camelCase qui convertie une chaine de caractère en format camelCase
+    //Fonction camelCase
     public function camelCase ()
     {
-        return $this->replace('_', ' ')->replace('-', ' ')->ucwords()->replace(' ','')->lcfirst();
+        if(strpos($this->string, ' ')==FALSE )
+        {
+            return $this->replace('_', ' ')->replace('-', ' ')->ucwords()->replace(' ','')->lcfirst();
+        }
+        return $this->replace('_', ' ')->replace('-', ' ')->lcwords()->ucwords()->replace(' ','')->lcfirst();
     }
 
+    //Fonction snakeCase
     public function snakeCase()
     {
-        return $this->replace('_', ' ')->replace('-', ' ')->pregreplace()->replace(' ','_')->lcwords();
+        if(strpos($this->string, ' ')==FALSE && strpos($this->string, '_')==FALSE && strpos($this->string, '-')==FALSE )
+        {
+            return $this->pregreplace('/(.)(?=[A-Z])/', '$1 ')->replace('_', ' ')->replace('-', ' ')->replace(' ','_')->lcwords();
+        }
+        return $this->replace('_', ' ')->replace('-', ' ')->replace(' ','_')->lcwords();
     }
 
+    //Fonction slugcase
+    public function slugcase()
+    {
+        if(strpos($this->string, ' ')==FALSE && strpos($this->string, '_')==FALSE && strpos($this->string, '-')==FALSE )
+        {
+            return $this->pregreplace('/(.)(?=[A-Z])/', '$1 ')->replace('_', ' ')->replace('-', ' ')->replace(' ','-')->lcwords();
+        }
+        return $this->replace('_', ' ')->replace('-', ' ')->replace(' ','-')->lcwords();
+    }
+
+    //Fonction studlycase
+    public function studlycase()
+    {
+        if(strpos($this->string, ' ')==FALSE && strpos($this->string, '_')==FALSE && strpos($this->string, '-')==FALSE )
+        {
+            return $this->pregreplace('/(.)(?=[A-Z])/', '$1 ')->replace('_', ' ')->replace('-', ' ')->ucwords()->replace(' ','');
+        }
+        return $this->lcwords()->replace('_', ' ')->replace('-', ' ')->ucwords()->replace(' ','');
+    }
+
+    //Second nom de la fonction studlycase
+    public function titleCase()
+    {
+        return $this->studlycase();
+    }
+
+    //Second nom de la fonction slugCase
+    public function kebabCase()
+    {
+        return $this->slugcase();
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-
-    function str()
+    function str($string)
     {
+        return new Str($string);
     }
